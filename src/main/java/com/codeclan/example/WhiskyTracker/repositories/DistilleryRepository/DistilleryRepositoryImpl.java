@@ -22,8 +22,22 @@ public class DistilleryRepositoryImpl implements DistilleryRepositoryCustom {
 
         try {
             Criteria cr = session.createCriteria(Distillery.class);
-//            cr.createAlias("distilleries", "distilleryAlias");
             cr.add(Restrictions.eq("region", region));
+            result = cr.list();
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        }
+        return result;
+    }
+
+    @Transactional
+    public List<Distillery> findDistilleriesWithWhiskyByAge(int age){
+        List<Distillery> result = null;
+        Session session = entityManager.unwrap(Session.class);
+        try {
+            Criteria cr = session.createCriteria(Distillery.class);
+            cr.createAlias("whiskies", "whiskiesAlias");
+            cr.add(Restrictions.eq("whiskiesAlias.age", age));
             result = cr.list();
         } catch (HibernateException ex) {
             ex.printStackTrace();

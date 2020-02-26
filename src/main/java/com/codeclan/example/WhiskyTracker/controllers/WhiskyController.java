@@ -16,12 +16,22 @@ import java.util.List;
 @RequestMapping(value = "/whiskies")
 public class WhiskyController {
 
-//    @Autowired
-//    WhiskyRepository whiskyRepository;
-//
-//    @GetMapping(value = "/search/findWhiskiesFromParticularDistilleryOfAge")
-//    public List<Whisky> findWhiskiesFromParticularDistilleryOfAge(@RequestParam Long id, int age){
-//        return whiskyRepository.findWhiskiesFromParticularDistilleryOfAge(id, age);
-//    }
+    @Autowired
+    WhiskyRepository whiskyRepository;
+
+    @GetMapping(value = "/search/findWhiskiesFromYear")
+    public List<Whisky> findWhiskiesFromYear(@RequestParam int year){
+        return whiskyRepository.findWhiskiesFromYear(year);
+    }
+
+    @GetMapping(value = "/search/findWhiskiesFromParticularDistilleryOfAge")
+    public List<Whisky> findWhiskiesFromParticularDistilleryOfAge(@RequestParam String name, int age){
+        return whiskyRepository.findWhiskiesFromParticularDistilleryOfAge(name, age);
+    }
+
+    @GetMapping(value = "/search/whiskiesFromRegion")
+    public List<Whisky> whiskiesFromRegion(@RequestParam String region){
+        return whiskyRepository.whiskiesFromRegion(region);
+    }
 
 }

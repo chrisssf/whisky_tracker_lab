@@ -18,7 +18,13 @@ public class DistilleryController {
     DistilleryRepository distilleryRepository;
 
     @GetMapping(value = "/search/findDistilleriesByRegion")
-    public List<Distillery> findDistilleriesByRegion(@RequestParam String region){
+    public List<Distillery> findDistilleriesByRegion(@RequestParam String region) {
         return distilleryRepository.findDistilleriesByRegion(region);
     }
+
+    @GetMapping(value = "/search/findDistilleriesWithWhiskyByAge")
+    public List<Distillery> findDistilleriesWithWhiskyByAge(int age){
+        return distilleryRepository.findDistilleriesWithWhiskyByAge(age);
+    }
+
 }
